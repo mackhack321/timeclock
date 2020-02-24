@@ -10,12 +10,6 @@ using System.Windows.Forms;
 
 namespace Timeclock
 {
-    public class Employee
-    { 
-        private string employeeID { get; set; }
-        private string fname { get; set; }
-        private string lname { get; set; }
-    }
     public partial class Timeclock : Form
     {
         public Timeclock()
@@ -27,5 +21,11 @@ namespace Timeclock
         {
             buttonClockIn.Enabled = true;
         }
+    }
+    public class Employee
+    {
+        private string employeeID { get; set; }
+        private string fname { get; set; }
+        private string lname { get; set; }
     }
 }
