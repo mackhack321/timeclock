@@ -52,19 +52,10 @@
     <Compile Include="Timeclock.Designer.cs">
       <DependentUpon>Timeclock.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewEmployee.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NewEmployee.Designer.cs">
-      <DependentUpon>NewEmployee.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Timeclock.resx">
       <DependentUpon>Timeclock.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NewEmployee.resx">
-      <DependentUpon>NewEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

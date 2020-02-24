@@ -12,6 +12,7 @@ namespace Timeclock
 {
     public partial class Timeclock : Form
     {
+        private string employeeID;
         public Timeclock()
         {
             InitializeComponent();
@@ -21,11 +22,12 @@ namespace Timeclock
         {
             buttonClockIn.Enabled = true;
         }
-    }
-    public class Employee
-    {
-        private string employeeID { get; set; }
-        private string fname { get; set; }
-        private string lname { get; set; }
+
+        private void buttonNewID_Click(object sender, EventArgs e)
+        {
+            textBoxNewID.Visible = true;
+            labelNewID.Visible = true;
+            buttonCreateID.Visible = true;
+        }
     }
 }
