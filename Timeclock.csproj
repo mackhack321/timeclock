@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs" />
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Timeclock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Timeclock.Designer.cs">
+      <DependentUpon>Timeclock.cs</DependentUpon>
     </Compile>
     <Compile Include="NewEmployee.cs">
       <SubType>Form</SubType>
@@ -58,8 +60,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Timeclock.resx">
+      <DependentUpon>Timeclock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewEmployee.resx">
       <DependentUpon>NewEmployee.cs</DependentUpon>
