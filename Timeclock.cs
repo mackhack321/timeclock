@@ -15,6 +15,7 @@ namespace Timeclock
     {
         private string employeeID;
         private const string RECORD_FILE = "log.csv";
+        private const string CREDS_FILE = "creds.csv";
 
         private DateTime clockIn;
         private DateTime clockOut;
@@ -24,9 +25,56 @@ namespace Timeclock
             InitializeComponent();
         }
 
-        private void logInAs(string ID)
+        private bool verifyCreds(string ID, string password)
+        {
+            string line;
+            List<string[]> lines = new List<string[]>();
+            using (StreamReader file = new StreamReader(CREDS_FILE))
+            {
+                file.ReadLine(); // skip header
+
+                while ((line = file.ReadLine()) != null)
+                {
+                    lines.Add(line.Split(','));
+                }
+            }
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                if (lines[i][0] == ID && lines[i][1] == password) { return true;  }
+            }
+
+            return false;
+        }
+
+        private void showEmployeeCreation()
+        {
+            textBoxNewID.Visible = true;
+            textBoxNewPassword.Visible = true;
+
+            buttonCreateID.Visible = true;
+
+            labelNewID.Visible = true;
+            labelNewPassword.Visible = true;
+        }
+
+        private void hideEmployeeCreation()
+        {
+            textBoxNewID.Visible = false;
+            textBoxNewPassword.Visible = false;
+
+            buttonCreateID.Visible = false;
+
+            labelNewID.Visible = false;
+            labelNewPassword.Visible = false;
+        }
+
+        private void logInAs(string ID, string password)
         {
             textBoxEmployeeID.Clear();
+            textBoxPassword.Clear();
+
+            employeeID = ID;
 
             if (string.IsNullOrWhiteSpace(ID))
             {
@@ -34,16 +82,24 @@ namespace Timeclock
             }
             else
             {
-                labelGreeting.Text = "Hello, " + ID;
-                buttonClockIn.Enabled = true;
-
-                buttonLogIn.Enabled = false;
-                buttonNewID.Enabled = false;
-                textBoxEmployeeID.Enabled = false;
-
-                if (ID.EndsWith("_mgr"))
+                if (verifyCreds(ID, password))
                 {
-                    buttonOpenRecordExt.Visible = true;
+                    labelGreeting.Text = "Hello, " + ID;
+                    buttonClockIn.Enabled = true;
+
+                    buttonLogIn.Enabled = false;
+                    buttonNewID.Enabled = false;
+                    textBoxEmployeeID.Enabled = false;
+                    textBoxPassword.Enabled = false;
+
+                    if (ID.EndsWith("_mgr"))
+                    {
+                        buttonOpenRecordExt.Visible = true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Employee ID or Password incorrect", "ERROR: Invalid Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -83,17 +139,40 @@ namespace Timeclock
             
         }
 
+        private void makeNewEmployee(string ID, string password)
+        {
+            try
+            {
+                if (!File.Exists(CREDS_FILE))
+                {
+                    using (StreamWriter file = File.CreateText(CREDS_FILE))
+                    {
+                        string header = "Employee ID,Password";
+                        file.WriteLine(header);
+                        file.Close();
+                    }
+                }
+
+                using (StreamWriter file = File.AppendText(CREDS_FILE))
+                {
+                    file.WriteLine($"{ID},{password}");
+                    file.Close();
+                }
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Could not open credentials file.  Please make sure the file is not opened in another program.", "ERROR: Could Not Open File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void buttonLogIn_Click(object sender, EventArgs e)
         {
-            employeeID = textBoxEmployeeID.Text;
-            logInAs(employeeID);
+            logInAs(textBoxEmployeeID.Text, textBoxPassword.Text);
         }
 
         private void buttonNewID_Click(object sender, EventArgs e)
         {
-            textBoxNewID.Visible = true;
-            labelNewID.Visible = true;
-            buttonCreateID.Visible = true;
+            showEmployeeCreation();
         }
 
         private void buttonClockIn_Click(object sender, EventArgs e)
@@ -116,7 +195,8 @@ namespace Timeclock
 
         private void buttonCreateID_Click(object sender, EventArgs e)
         {
-            logInAs(textBoxNewID.Text);
+            makeNewEmployee(textBoxNewID.Text, textBoxNewPassword.Text);
+            hideEmployeeCreation();
         }
 
         private void buttonOpenRecordExt_Click(object sender, EventArgs e)

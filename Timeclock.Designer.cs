@@ -41,6 +41,10 @@
             this.buttonCreateID = new System.Windows.Forms.Button();
             this.labelGreeting = new System.Windows.Forms.Label();
             this.buttonOpenRecordExt = new System.Windows.Forms.Button();
+            this.labelPassword = new System.Windows.Forms.Label();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.textBoxNewPassword = new System.Windows.Forms.TextBox();
+            this.labelNewPassword = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonClockIn
@@ -85,7 +89,7 @@
             // 
             // buttonLogIn
             // 
-            this.buttonLogIn.Location = new System.Drawing.Point(256, 237);
+            this.buttonLogIn.Location = new System.Drawing.Point(257, 293);
             this.buttonLogIn.Name = "buttonLogIn";
             this.buttonLogIn.Size = new System.Drawing.Size(108, 39);
             this.buttonLogIn.TabIndex = 4;
@@ -95,7 +99,7 @@
             // 
             // buttonNewID
             // 
-            this.buttonNewID.Location = new System.Drawing.Point(256, 331);
+            this.buttonNewID.Location = new System.Drawing.Point(257, 377);
             this.buttonNewID.Name = "buttonNewID";
             this.buttonNewID.Size = new System.Drawing.Size(108, 39);
             this.buttonNewID.TabIndex = 4;
@@ -106,7 +110,7 @@
             // labelOr
             // 
             this.labelOr.AutoSize = true;
-            this.labelOr.Location = new System.Drawing.Point(294, 300);
+            this.labelOr.Location = new System.Drawing.Point(295, 346);
             this.labelOr.Name = "labelOr";
             this.labelOr.Size = new System.Drawing.Size(27, 13);
             this.labelOr.TabIndex = 3;
@@ -114,7 +118,7 @@
             // 
             // textBoxNewID
             // 
-            this.textBoxNewID.Location = new System.Drawing.Point(241, 401);
+            this.textBoxNewID.Location = new System.Drawing.Point(242, 447);
             this.textBoxNewID.Name = "textBoxNewID";
             this.textBoxNewID.Size = new System.Drawing.Size(140, 20);
             this.textBoxNewID.TabIndex = 2;
@@ -123,7 +127,7 @@
             // labelNewID
             // 
             this.labelNewID.AutoSize = true;
-            this.labelNewID.Location = new System.Drawing.Point(245, 385);
+            this.labelNewID.Location = new System.Drawing.Point(246, 431);
             this.labelNewID.Name = "labelNewID";
             this.labelNewID.Size = new System.Drawing.Size(136, 13);
             this.labelNewID.TabIndex = 3;
@@ -132,7 +136,7 @@
             // 
             // buttonCreateID
             // 
-            this.buttonCreateID.Location = new System.Drawing.Point(271, 427);
+            this.buttonCreateID.Location = new System.Drawing.Point(273, 541);
             this.buttonCreateID.Name = "buttonCreateID";
             this.buttonCreateID.Size = new System.Drawing.Size(75, 23);
             this.buttonCreateID.TabIndex = 5;
@@ -163,6 +167,42 @@
             this.buttonOpenRecordExt.Visible = false;
             this.buttonOpenRecordExt.Click += new System.EventHandler(this.buttonOpenRecordExt_Click);
             // 
+            // labelPassword
+            // 
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Location = new System.Drawing.Point(260, 249);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(104, 13);
+            this.labelPassword.TabIndex = 3;
+            this.labelPassword.Text = "Enter your Password";
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Location = new System.Drawing.Point(241, 265);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
+            this.textBoxPassword.Size = new System.Drawing.Size(140, 20);
+            this.textBoxPassword.TabIndex = 2;
+            // 
+            // textBoxNewPassword
+            // 
+            this.textBoxNewPassword.Location = new System.Drawing.Point(242, 496);
+            this.textBoxNewPassword.Name = "textBoxNewPassword";
+            this.textBoxNewPassword.PasswordChar = '*';
+            this.textBoxNewPassword.Size = new System.Drawing.Size(140, 20);
+            this.textBoxNewPassword.TabIndex = 2;
+            this.textBoxNewPassword.Visible = false;
+            // 
+            // labelNewPassword
+            // 
+            this.labelNewPassword.AutoSize = true;
+            this.labelNewPassword.Location = new System.Drawing.Point(249, 480);
+            this.labelNewPassword.Name = "labelNewPassword";
+            this.labelNewPassword.Size = new System.Drawing.Size(122, 13);
+            this.labelNewPassword.TabIndex = 3;
+            this.labelNewPassword.Text = "Enter the new Password";
+            this.labelNewPassword.Visible = false;
+            // 
             // Timeclock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,9 +214,13 @@
             this.Controls.Add(this.buttonNewID);
             this.Controls.Add(this.buttonLogIn);
             this.Controls.Add(this.labelOr);
+            this.Controls.Add(this.labelNewPassword);
             this.Controls.Add(this.labelNewID);
+            this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.labelEmployeeID);
+            this.Controls.Add(this.textBoxNewPassword);
             this.Controls.Add(this.textBoxNewID);
+            this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxEmployeeID);
             this.Controls.Add(this.buttonClockOut);
             this.Controls.Add(this.buttonClockIn);
@@ -202,6 +246,10 @@
         private System.Windows.Forms.Button buttonCreateID;
         private System.Windows.Forms.Label labelGreeting;
         private System.Windows.Forms.Button buttonOpenRecordExt;
+        private System.Windows.Forms.Label labelPassword;
+        private System.Windows.Forms.TextBox textBoxPassword;
+        private System.Windows.Forms.TextBox textBoxNewPassword;
+        private System.Windows.Forms.Label labelNewPassword;
     }
 }
 
