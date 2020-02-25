@@ -40,6 +40,11 @@ namespace Timeclock
                 buttonLogIn.Enabled = false;
                 buttonNewID.Enabled = false;
                 textBoxEmployeeID.Enabled = false;
+
+                if (ID.EndsWith("_mgr"))
+                {
+                    buttonOpenRecordExt.Visible = true;
+                }
             }
         }
 
@@ -112,6 +117,11 @@ namespace Timeclock
         private void buttonCreateID_Click(object sender, EventArgs e)
         {
             logInAs(textBoxNewID.Text);
+        }
+
+        private void buttonOpenRecordExt_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(RECORD_FILE);
         }
     }
 }

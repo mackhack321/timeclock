@@ -40,6 +40,7 @@
             this.labelNewID = new System.Windows.Forms.Label();
             this.buttonCreateID = new System.Windows.Forms.Button();
             this.labelGreeting = new System.Windows.Forms.Label();
+            this.buttonOpenRecordExt = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonClockIn
@@ -151,11 +152,23 @@
             this.labelGreeting.Text = "Please Log In";
             this.labelGreeting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // buttonOpenRecordExt
+            // 
+            this.buttonOpenRecordExt.Location = new System.Drawing.Point(209, 605);
+            this.buttonOpenRecordExt.Name = "buttonOpenRecordExt";
+            this.buttonOpenRecordExt.Size = new System.Drawing.Size(210, 23);
+            this.buttonOpenRecordExt.TabIndex = 7;
+            this.buttonOpenRecordExt.Text = "Open Record File in External Program";
+            this.buttonOpenRecordExt.UseVisualStyleBackColor = true;
+            this.buttonOpenRecordExt.Visible = false;
+            this.buttonOpenRecordExt.Click += new System.EventHandler(this.buttonOpenRecordExt_Click);
+            // 
             // Timeclock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1196, 649);
+            this.Controls.Add(this.buttonOpenRecordExt);
             this.Controls.Add(this.labelGreeting);
             this.Controls.Add(this.buttonCreateID);
             this.Controls.Add(this.buttonNewID);
@@ -188,6 +201,7 @@
         private System.Windows.Forms.Label labelNewID;
         private System.Windows.Forms.Button buttonCreateID;
         private System.Windows.Forms.Label labelGreeting;
+        private System.Windows.Forms.Button buttonOpenRecordExt;
     }
 }
 
