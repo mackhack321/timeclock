@@ -14,8 +14,8 @@ namespace Timeclock
     public partial class Timeclock : Form
     {
         private string employeeID;
-        private const string RECORD_FILE = "log.csv";
-        private const string CREDS_FILE = "creds.csv";
+        public const string RECORD_FILE = "log.csv";
+        public const string CREDS_FILE = "creds.csv";
 
         private DateTime clockIn;
         private DateTime clockOut;
@@ -29,14 +29,23 @@ namespace Timeclock
         {
             string line;
             List<string[]> lines = new List<string[]>();
-            using (StreamReader file = new StreamReader(CREDS_FILE))
+            try
             {
-                file.ReadLine(); // skip header
-
-                while ((line = file.ReadLine()) != null)
+                using (StreamReader file = new StreamReader(CREDS_FILE))
                 {
-                    lines.Add(line.Split(','));
+                    file.ReadLine(); // skip header
+
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        lines.Add(line.Split(','));
+                    }
+
+                    file.Close();
                 }
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Could not open credentials file.  Please make sure the file is not opened in another program.", "ERROR: Could Not Open File", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             for (int i = 0; i < lines.Count; i++)
@@ -95,6 +104,7 @@ namespace Timeclock
                     if (ID.EndsWith("_mgr"))
                     {
                         buttonOpenRecordExt.Visible = true;
+                        buttonOpenLogView.Visible = true;
                     }
                 }
                 else
@@ -116,16 +126,6 @@ namespace Timeclock
 
             try
             {
-                if (!File.Exists(RECORD_FILE))
-                {
-                    using (StreamWriter file = File.CreateText(RECORD_FILE))
-                    {
-                        string header = "Employee ID,Time In,Time Out,Duration";
-                        file.WriteLine(header);
-                        file.Close();
-                    }
-                }
-
                 using (StreamWriter file = File.AppendText(RECORD_FILE))
                 {
                     file.WriteLine(data);
@@ -143,20 +143,12 @@ namespace Timeclock
         {
             try
             {
-                if (!File.Exists(CREDS_FILE))
-                {
-                    using (StreamWriter file = File.CreateText(CREDS_FILE))
-                    {
-                        string header = "Employee ID,Password";
-                        file.WriteLine(header);
-                        file.Close();
-                    }
-                }
-
                 using (StreamWriter file = File.AppendText(CREDS_FILE))
                 {
                     file.WriteLine($"{ID},{password}");
                     file.Close();
+
+                    MessageBox.Show($"Created Employee ID {ID} with password {password}", "Employee Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (IOException)
@@ -202,6 +194,45 @@ namespace Timeclock
         private void buttonOpenRecordExt_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(RECORD_FILE);
+        }
+
+        private void buttonOpenLogView_Click(object sender, EventArgs e)
+        {
+            RecordSearch recordSearch = new RecordSearch();
+            recordSearch.Show();
+        }
+
+        private void Timeclock_Load(object sender, EventArgs e)
+        {
+            if (!File.Exists(CREDS_FILE))
+            {
+                using (StreamWriter file = File.CreateText(CREDS_FILE))
+                {
+                    string header = "Employee ID,Password";
+                    file.WriteLine(header);
+                    file.Close();
+                }
+            }
+
+            if (!File.Exists(RECORD_FILE))
+            {
+                using (StreamWriter file = File.CreateText(RECORD_FILE))
+                {
+                    string header = "Employee ID,Time In,Time Out,Duration";
+                    file.WriteLine(header);
+                    file.Close();
+                }
+            }
+        }
+
+        private void textBoxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter) { buttonLogIn.PerformClick(); }
+        }
+
+        private void textBoxNewPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter) { buttonCreateID.PerformClick(); }
         }
     }
 }

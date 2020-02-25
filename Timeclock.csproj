@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RecordSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecordSearch.Designer.cs">
+      <DependentUpon>RecordSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Timeclock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +60,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="RecordSearch.resx">
+      <DependentUpon>RecordSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Timeclock.resx">
       <DependentUpon>Timeclock.cs</DependentUpon>
     </EmbeddedResource>
