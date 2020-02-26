@@ -149,6 +149,8 @@ namespace Timeclock
                     file.Close();
 
                     MessageBox.Show($"Created Employee ID {ID} with password {password}", "Employee Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    logInAs(ID, password);
                 }
             }
             catch (IOException)

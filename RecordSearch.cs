@@ -67,16 +67,23 @@ namespace Timeclock
 
             foreach (DataGridViewRow row in dataGridViewRecords.Rows)
             {
-                if ((string)row.Cells[0].Value != id) { results.Add(row); }
+                if ((string)row.Cells[0].Value == id) { results.Add(row); }
             }
 
             if (results.Count == 0)
             {
                 MessageBox.Show("Found no results.", "Search Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
             else
             {
-                foreach (DataGridViewRow row in results) { dataGridViewRecords.Rows.Remove(row); }
+                foreach (DataGridViewRow row in results)
+                {
+                    if (!results.Contains(row))
+                    {
+                        dataGridViewRecords.Rows.Remove(row);
+                    } 
+                }
             }
         }
 
